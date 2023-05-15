@@ -6,7 +6,7 @@ const PORT = 5000;
 // use bodyParser.urlencoded throughout the app with this:
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let jokes = [
+const jokes = [
   {
     whoseJoke: "Danny",
     jokeQuestion: "Why do scuba divers fall backwards out of boats?",
@@ -36,6 +36,25 @@ let jokes = [
 
 // serve back static files
 app.use(express.static('server/public'));
+
+
+
+app.get('/jokes',function(req,res){
+  res.send(jokes);
+ 
+  console.log('Our jokes are loading', req.body);
+})
+
+app.post('/jokes',function(req,res){
+  res.sendStatus(201)
+  jokes.push(req.body)
+  
+})
+
+
+
+
+
 
 app.listen(PORT, () => {
   console.log('server running on: ', PORT);
